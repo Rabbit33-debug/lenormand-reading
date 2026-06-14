@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>月棱雷诺曼</title>
+    <link rel="stylesheet" href="./styles.css?v=10" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Lenormand</p>
+          <h1>月棱雷诺曼</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="historyToggle" type="button" title="历史记录" aria-label="历史记录">◷</button>
+          <button class="icon-button" id="themeToggle" type="button" title="切换光影" aria-label="切换光影">☾</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="control-panel" aria-label="抽牌设置">
+          <div class="field-stack">
+            <label for="question">问题</label>
+            <textarea id="question" rows="4" placeholder="此刻最想确认的事情"></textarea>
+          </div>
+
+          <div class="field-stack">
+            <label for="topic">主题</label>
+            <select id="topic">
+              <option value="general">综合</option>
+              <option value="love">感情</option>
+              <option value="career">事业</option>
+              <option value="money">金钱</option>
+              <option value="social">人际</option>
+              <option value="self">人生方向</option>
+            </select>
+          </div>
+
+          <div class="field-stack">
+            <label for="deckMode">牌组</label>
+            <select id="deckMode">
+              <option value="classic">经典 36 张</option>
+              <option value="akashic">扩展 48 张</option>
+            </select>
+          </div>
+
+          <div class="spread-tabs" role="tablist" aria-label="牌阵">
+            <button class="spread-tab is-active" type="button" data-spread="daily">一牌</button>
+            <button class="spread-tab" type="button" data-spread="three">三牌</button>
+            <button class="spread-tab" type="button" data-spread="five">五牌</button>
+            <button class="spread-tab" type="button" data-spread="nine">九宫</button>
+          </div>
+
+          <div class="action-row">
+            <button class="primary-button" id="drawButton" type="button"><span>✦</span> 抽牌</button>
+            <button class="ghost-button" id="shuffleButton" type="button"><span>↻</span> 洗牌</button>
+          </div>
+
+          <div class="deck-meter" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <p class="disclaimer">仅作自我探索，不替代专业建议。</p>
+        </section>
+
+        <div class="reading-column spread-daily" id="readingColumn">
+          <section class="reading-table" aria-label="牌桌">
+            <div class="table-header">
+              <div>
+                <p class="eyebrow">Spread</p>
+                <h2 id="spreadTitle">每日一牌</h2>
+              </div>
+              <p id="readingStamp">等待抽牌</p>
+            </div>
+
+            <div class="cards-stage daily" id="cardsStage" aria-live="polite"></div>
+          </section>
+
+          <aside class="insight-panel" aria-label="解读">
+            <div class="panel-title-row">
+              <div>
+                <p class="eyebrow">Reading</p>
+                <h2>解读</h2>
+              </div>
+              <button class="icon-button" id="saveButton" type="button" title="保存本次" aria-label="保存本次" disabled>♡</button>
+            </div>
+
+            <div class="empty-state" id="emptyState"></div>
+
+            <div class="reading-output" id="readingOutput" hidden>
+              <div class="polarity-overview" id="polarityOverview">
+                <div class="polarity-emoji" id="polarityEmoji">⚖️</div>
+                <div>
+                  <strong id="polarityTitle">整体牌面</strong>
+                  <p id="polarityText"></p>
+                </div>
+              </div>
+              <section>
+                <h3>主线</h3>
+                <div class="summary-block" id="summaryText"></div>
+              </section>
+              <section>
+                <h3>深度解读</h3>
+                <div class="deep-list" id="deepList"></div>
+              </section>
+              <section>
+                <h3>组合信号</h3>
+                <div class="combo-list" id="comboList"></div>
+              </section>
+              <section>
+                <h3>单牌</h3>
+                <div class="card-notes" id="cardNotes"></div>
+              </section>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <aside class="history-drawer" id="historyDrawer" aria-label="历史记录" aria-hidden="true">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow">Archive</p>
+          <h2>历史</h2>
+        </div>
+        <div class="drawer-actions">
+          <button class="icon-button" id="clearHistory" type="button" title="清空历史" aria-label="清空历史">⌫</button>
+          <button class="icon-button" id="closeHistory" type="button" title="关闭" aria-label="关闭">×</button>
+        </div>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </aside>
+
+    <script src="./app.js?v=10"></script>
+  </body>
+</html>
